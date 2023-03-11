@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @events = Event.all
   end
@@ -12,7 +14,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html {redirect_to root_path, notice: "Event was succesfully created."}
+        format.html {redirect_to user_path(current_user.id), notice: "Event was succesfully created."}
       else
         format.html { render :new}
       end
