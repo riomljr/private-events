@@ -1,16 +1,17 @@
 <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Private Events</a>
+    <%= link_to 'Private Events',
+    root_path, class: "navbar-brand"%>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <%= link_to "Sign Up", 
-          new_user_registration_path, class: "nav-link active"%>
-        <%= link_to "Sign Up", 
-          new_user_session_path, class: "nav-link active"%>
-       
+        <%if user_signed_in? %>
+          <%=render "layouts/signedin"%>
+        <%else%>
+          <%=render "layouts/signedout"%>
+        <%end%>
       </ul>
     </div>
   </div>
