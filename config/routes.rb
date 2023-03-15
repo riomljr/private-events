@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
+  root to: 'events#index'
   devise_for :users
   resources :events
-  #get 'events/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :attending_events
+  
+  get 'users/:id', to: 'users#show', as: 'user'
+  post '/users/:user_id/events/:id', to:"attending_events#create", as: "create_attending_event"
+  get '/users/:id/attended_events', to:"users#show_attended_events", as: "show_attended_events"
 
-  # Defines the root path route ("/")
-   root "events#index"
-
-   get 'users/:id', to:'users#show', as: 'user'
+   
 end
