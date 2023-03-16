@@ -19,7 +19,12 @@
       <td > <%= User.find(@event.creator_id).username%> </td>
   </tbody>
 </table>
-
+<% if current_user == @event.creator%>
+  <div  class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <%= link_to "Edit Event", edit_event_path(@event.id), class: "btn btn-primary"%> 
+    <%= button_to "Delete Event", event_path(@event.id), method: :delete, class: "btn btn-danger"%>
+  </div>
+<%end%>
 
 <table class="table table-striped">
    <thead>
@@ -35,3 +40,4 @@
     <%end%>
   </tbody>
 </table>
+
