@@ -1,0 +1,32 @@
+   <h4>Future Events</h4>
+   <table class="table table-striped">
+   <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Location</th>
+      <th scope="col">Event Date</th>
+      <th scope="col">Created By</th>
+      <th scope="col">Registration</th>
+      <th scope="col"></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+   <% @events.future.each do |event| %>
+    <tr>
+      <td > <%=event.name%> </td>
+      <td > <%= event.location %> </td>
+      <td > <%= event.event_date %> </td>
+      <td > <%= User.find(event.creator_id).username%> </td>
+      <% if current_user.id == event.creator.id%>
+      <td > Event Creator </td>
+      <%elsif event.attendees.include?(current_user)%>
+      <td > <%= button_to "Deregister", destroy_attending_event_path(:user_id => current_user.id, :id => event.id),
+      method: :delete, class: "btn btn-danger"%></td>
+      <%else%>
+      <td > <%= button_to "Register", create_attending_event_path(:user_id=>current_user.id, :id=>event.id), method: :post, class: "btn btn-secondary" %> </td>
+      <%end%>
+      <td><%= link_to "Details", event_path(event.id), class: "btn btn-secondary" %></td>
+
+    <% end %>
+  </tbody>

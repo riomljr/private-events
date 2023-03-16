@@ -12,7 +12,13 @@ class AttendingEventsController < ApplicationController
     
   end
 
-
+  def destroy
+    @event = Event.find(params[:id])
+    @event.attendees.delete(current_user)
+    flash[:notice] = "You have degeristered successfully"
+    redirect_to root_path
+  end
+  
   private
 
   def attending_event_params

@@ -1,0 +1,24 @@
+   <h4>Past Events</h4>
+   <table class="table table-striped">
+   <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Location</th>
+      <th scope="col">Event Date</th>
+      <th scope="col">Created By</th>
+      <th scope="col"></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+   <% @events.past.each do |event| %>
+    <tr>
+      <td > <%=event.name%> </td>
+      <td > <%= event.location %> </td>
+      <td > <%= event.event_date %> </td>
+      <td > <%= User.find(event.creator_id).username%> </td>
+
+      <td><%= link_to "Details", event_path(event.id), class: "btn btn-secondary" %></td>
+
+    <% end %>
+  </tbody>
