@@ -33,10 +33,10 @@
     </tr>
   </thead>
   <tbody>
-  
     <tr>
-    <%@event.attendees.each do |attendee|%>
-      <td ><%= attendee.username%></td>
+      <%@event.attendees.each do |attendee|%>
+        <td ><%= attendee.username%></td> 
+    </tr>
     <%end%>
   </tbody>
 </table>
